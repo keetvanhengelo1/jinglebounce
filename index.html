@@ -53,7 +53,14 @@ h2{font:700 clamp(2rem,9vw,3rem)/1 var(--display);margin-bottom:1.5rem;text-shad
 .logo{font:700 clamp(3.6rem,20vw,7.5rem)/.85 var(--display);letter-spacing:-.01em;-webkit-text-stroke:9px var(--navy);paint-order:stroke fill;
   filter:drop-shadow(0 6px 0 rgba(0,0,0,.35))}
 .logo .j{color:var(--red);display:block}
-.logo .b{color:#fff;display:block;background:repeating-linear-gradient(-45deg,#fff 0 .35em,#ffc9cc .35em .6em);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+/* Bounce: elke letter heeft een outline (::before) en een glanzende vulling (::after) */
+.logo .b{display:block;font-size:1.12em;line-height:.9;margin-top:.04em}
+.l{position:relative;display:inline-block;color:transparent;-webkit-text-stroke:0;animation:letter 1.3s ease-in-out infinite;animation-delay:calc(var(--i)*.12s)}
+.l::before,.l::after{content:attr(data-t);position:absolute;left:0;top:0}
+.l::before{color:var(--navy);-webkit-text-stroke:.13em var(--navy)}
+.l::after{background:linear-gradient(180deg,rgba(255,255,255,.95) 0,rgba(255,255,255,0) 45%),linear-gradient(180deg,#fff 35%,#a9b9f0 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.l.s::after{background:linear-gradient(180deg,rgba(255,255,255,.7) 0,rgba(255,255,255,0) 40%),repeating-linear-gradient(-45deg,#fff 0 .17em,var(--red) .17em .34em);-webkit-background-clip:text;background-clip:text}
+@keyframes letter{0%,100%{transform:translateY(0) scale(1.03,.95)}50%{transform:translateY(-.1em) scale(.98,1.04)}}
 .slogan{font:600 1.35rem/1.25 var(--display);margin:1.25rem 0 1rem;max-width:20ch}
 .facts{display:grid;gap:.6rem;margin-bottom:1.5rem;width:100%;max-width:380px}
 .facts div{background:rgba(13,18,80,.8);border:3px solid var(--blue);border-radius:18px;padding:.6rem 1rem;font:600 1.15rem var(--display)}
@@ -80,8 +87,9 @@ h2{font:700 clamp(2rem,9vw,3rem)/1 var(--display);margin-bottom:1.5rem;text-shad
 /* ===== LOCATIE ===== */
 .place{background:linear-gradient(180deg,var(--blue),var(--navy));max-width:none}
 .place .in{max-width:760px;margin:0 auto}
-.frame{transform:rotate(-2deg);border:6px solid #fff;border-radius:22px;overflow:hidden;box-shadow:0 0 0 6px var(--red),0 14px 30px rgba(0,0,0,.4);margin:0 .4rem 1.5rem}
-.frame img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 40%}
+.frame{transform:rotate(-1.5deg);border:6px solid #fff;border-radius:22px;overflow:hidden;box-shadow:0 0 0 6px var(--red),0 14px 30px rgba(0,0,0,.4);margin:0 .2rem 1.5rem}
+.frame img{width:100%;height:auto;aspect-ratio:1055/1026;object-fit:cover}
+.place .pin{display:inline-block;margin:-.4rem 0 1.5rem;padding:.6rem 1.1rem;border:3px solid var(--yellow);border-radius:18px;background:rgba(13,18,80,.8);font:600 1.15rem var(--display)}
 .place h3{font:700 2rem/1.1 var(--display)}
 .place p{margin:.3rem 0 1.2rem}
 
@@ -129,12 +137,11 @@ footer{text-align:center;padding:2rem 1rem 2.5rem;font-weight:700}
 <header class="hero" id="top">
   <div class="snow" aria-hidden="true"></div>
   <div class="santa" role="img" aria-label="Opblaasbare kerstman met rockhanden"></div>
-  <h1 class="logo" aria-label="Jingle Bounce"><span class="j">Jingle</span><span class="b">Bounce</span></h1>
+  <h1 class="logo" aria-label="Jingle Bounce"><span class="j">Jingle</span><span class="b" aria-hidden="true"><span class="l s" data-t="B" style="--i:0">B</span><span class="l" data-t="o" style="--i:1">o</span><span class="l" data-t="u" style="--i:2">u</span><span class="l" data-t="n" style="--i:3">n</span><span class="l" data-t="c" style="--i:4">c</span><span class="l s" data-t="e" style="--i:5">e</span></span></h1>
   <p class="slogan">Bouncy techno in de kerstkeet!</p>
   <div class="facts">
     <div class="date">📅 18 december <span class="yr"></span></div>
     <div>🕗 Vanaf 20:00 uur</div>
-    <div>📍 KeetvanHengelo, Krombekkenweg</div>
   </div>
   <nav class="cta" aria-label="Snelkoppelingen">
     <a class="btn" href="#lineup">Bekijk de line-up</a>
@@ -160,9 +167,8 @@ footer{text-align:center;padding:2rem 1rem 2.5rem;font-weight:700}
 <section class="place" id="locatie">
   <div class="in">
     <h2>Locatie</h2>
-    <figure class="frame"><img src="keet.jpg" alt="De kerstversierde keet met houten bar en het Jingle Bounce-bord" loading="lazy" width="1086" height="1448"></figure>
-    <h3>KeetvanHengelo</h3>
-    <p>Krombekkenweg</p>
+    <p class="pin">📍 KeetvanHengelo, Krombekkenweg</p>
+    <figure class="frame"><img src="keet.jpg" alt="De kerstversierde keet met houten bar en het Jingle Bounce-bord" loading="lazy" width="1055" height="1026"></figure>
     <a class="btn" id="navBtn" href="#" target="_blank" rel="noopener">Hoe kom ik daar?</a>
   </div>
 </section>
